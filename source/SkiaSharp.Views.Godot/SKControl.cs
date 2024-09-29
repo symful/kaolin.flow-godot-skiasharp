@@ -1,5 +1,10 @@
 ﻿using Godot;
+
+#if __ANDROID__
+using SkiaSharp.Views.Android;
+#else
 using SkiaSharp.Views.Desktop;
+#endif
 
 namespace SkiaSharp.Views.Godot;
 
@@ -7,18 +12,24 @@ public partial class SKControl : Control
 {
     public SKSizeI CanvasSize => _bitmap is not null ? _imageInfo.Size : SKSizeI.Empty;
 
-	public event EventHandler<SKPaintSurfaceEventArgs>? PaintSurface;
+    public event EventHandler<SKPaintSurfaceEventArgs>? PaintSurface;
 
     #region Fields
     private SKImageInfo _imageInfo;
-    
+
     private SKBitmap? _bitmap;
     private SKSurface? _surface;
-    
+
     private ImageTexture? _imageTexture;
     #endregion
 
     public SKControl() => TreeExiting += OnTreeExiting;
+
+    public override void _Ready()
+    {
+        if (OS.GetName() == "Android")
+            GD.Print("Permission Request Status: " + OS.RequestPermissions());
+    }
 
     public override void _Draw()
     {
@@ -42,6 +53,14 @@ public partial class SKControl : Control
         }
 
         OnPaintSurface(new SKPaintSurfaceEventArgs(_surface, _imageInfo));
+        Flush();
+    }
+
+    public void Flush()
+    {
+
+        int width = (int)Size.X,
+            height = (int)Size.Y;
         _surface!.Canvas.Flush();
 
         var image = Image.CreateFromData(width, height, false, Image.Format.Rgba8, _bitmap!.Bytes);
@@ -55,7 +74,7 @@ public partial class SKControl : Control
 
         DrawTextureRect(_imageTexture, new Rect2(0, 0, width, height), false);
     }
-    
+
     protected virtual void OnPaintSurface(SKPaintSurfaceEventArgs e) => PaintSurface?.Invoke(this, e);
 
     private void OnTreeExiting()

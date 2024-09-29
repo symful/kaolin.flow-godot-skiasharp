@@ -3,14 +3,17 @@
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract> 
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Godot.SourceGenerators" Version="4.2.0" />
     <PackageReference Include="GodotSharp" Version="4.2.0" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.6" />
-    <PackageReference Include="SkiaSharp.Views.Desktop.Common" Version="2.88.6" />
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.8" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.8" />
+    <PackageReference Include="SkiaSharp.Views.Desktop.Common" Version="2.88.8" />
   </ItemGroup>
 
 </Project>

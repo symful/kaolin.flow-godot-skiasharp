@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiaSharp.Views.Godot", "source\SkiaSharp.Views.Godot\SkiaSharp.Views.Godot.csproj", "{285F2104-0F94-45D9-9AD7-65EF688C384A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "samples\Sample.csproj", "{9D6AB25A-EA16-4527-84D2-0F5FFC2439F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scene", "scene\Scene.csproj", "{9D6AB25A-EA16-4527-84D2-0F5FFC2439F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
