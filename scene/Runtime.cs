@@ -2,7 +2,12 @@ using System.IO;
 using Godot;
 using Kaolin.Flow.Core;
 using Miniscript;
+
+#if __ANDROID__
+using SkiaSharp.Views.Android;
+#else
 using SkiaSharp.Views.Desktop;
+#endif
 using Engine = Kaolin.Flow.Core.Engine;
 
 class Runtime(Scene.Scene scene, Interpreter interpreter, string path, bool isDebugging = false) : Engine(interpreter, path, isDebugging)

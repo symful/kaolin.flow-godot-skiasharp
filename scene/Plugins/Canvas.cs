@@ -11,7 +11,13 @@ using Kaolin.Flow.Plugins;
 using Microsoft.VisualBasic;
 using Miniscript;
 using SkiaSharp;
+
+#if __ANDROID__
+using SkiaSharp.Views.Android;
+#else
 using SkiaSharp.Views.Desktop;
+#endif
+
 using SkiaSharp.Views.Godot;
 
 class GradientPosition(float offset, SKColor color)
@@ -1821,7 +1827,12 @@ class CanvasPlugin(Runtime engine) : Base(engine)
 					.SetCallback((context, p) =>
 					{
 						using var stream = new MemoryStream();
+#if __ANDROID__
+
+						UnWrap().Item3.PeekPixels().ToBitmap().Compress(Android.Graphics.Bitmap.CompressFormat.Png, 100, stream);
+#else
 						UnWrap().Item3.PeekPixels().ToBitmap().Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+#endif
 
 						stream.Seek(0, SeekOrigin.Begin);
 
@@ -1835,7 +1846,11 @@ class CanvasPlugin(Runtime engine) : Base(engine)
 					.SetCallback((context, p) =>
 					{
 						using var stream = new MemoryStream();
+#if __ANDROID__
+						UnWrap().Item3.PeekPixels().ToBitmap().Compress(Android.Graphics.Bitmap.CompressFormat.Png, 100, stream);
+#else
 						UnWrap().Item3.PeekPixels().ToBitmap().Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+#endif
 
 						stream.Seek(0, SeekOrigin.Begin);
 
