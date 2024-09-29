@@ -1,0 +1,3 @@
+[submodule "scene/Kaolin.Flow"]
+	path = scene/Kaolin.Flow
+	url = https://github.com/KaolinFlow/Kaolin.Flow
